@@ -9,4 +9,6 @@
     - nxos_facts:
     - name: Get All Ip Addresses
       debug: var=ansible_net_all_ipv4_addresses
+    - name: Get whatever 1
+      debug: var=ansible_net_interfaces
 

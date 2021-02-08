@@ -1,0 +1,19 @@
+---
+
+- name: Change Ethernet Description and Assert
+  hosts: nxos
+  connection: httpapi
+  gather_facts: yes
+
+
+  tasks:
+    - name: Change Eth 1/1 Port Description
+      nxos_interface:
+        name: Ethernet1/1
+        description: 'uplink to core'
+    - nxos_facts:
+    - name: Get All Ip Addresses
+      debug: var=ansible_net_interfaces['Ethernet1/1']['description']
+    - name: Verify change was made
+      assert: { that: "ansible_net_interfaces['Ethernet1/1']['description'] == 'uplink to core'" }
+
