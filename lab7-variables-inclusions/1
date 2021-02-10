@@ -1,0 +1,15 @@
+---
+- name: Gather Nexus Facts
+  hosts: nxos
+  gather_facts: yes
+
+  tasks:
+    - name: Gather Facts
+      nxos_facts:
+    - name: Change Interface Desc and MTU
+      nxos_interface:
+        name: "{{ interface }}"
+       # description: "{{ int_desc }}"
+        mtu: "{{ int_mtu }}"
+        admin_state: up
+

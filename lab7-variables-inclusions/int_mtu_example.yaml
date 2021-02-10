@@ -1,0 +1,29 @@
+---
+- name: Gather Nexus Facts
+  hosts: nxos
+  gather_facts: yes
+
+  tasks:
+   - name: Gather facts
+     nxos_facts:
+      gather_subset: all
+
+   - name: Change Interface Desc and MTU
+     nxos_interface:
+       name: "{{ interface }}"
+       description: "{{ int_desc }}"
+       mtu: "{{ int_mtu }}"
+       admin_state: up
+
+   - name: Debugging Description
+     debug: var=ansible_net_interfaces['Ethernet1/2']['description']
+
+   - name: Verify change was made
+     assert:
+        that: 
+         - "ansible_net_interfaces['Ethernet1/2']['description'] == \"{{ int_desc }}\""
+         - "ansible_net_interfaces['Ethernet1/2']['mtu'] == \"{{ int_mtu }}\""
+
+
+    
+

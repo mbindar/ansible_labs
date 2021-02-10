@@ -1,0 +1,12 @@
+--- 
+
+- name: Setup Vlan
+  hosts: nxos
+
+  tasks:
+   - name: Include the variables from the YAML file
+     include_vars: vars/variables.yml
+   - name: Include the change_vlan file and set the variables
+     include: tasks/change_vlan.yml
+
+
